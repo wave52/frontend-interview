@@ -1,3 +1,14 @@
+/* 基础版 */
+// function debounce(fn, wait) {
+//     var timer = null;
+//     return function() {
+//         clearTimeout(timer)
+//         timer = setTimeout(() => {
+//             fn.apply(this, arguments)
+//         }, wait)
+//     }
+// }
+
 function debounce(fn, wait, immediate) {
     var timer = null;
     var result;
