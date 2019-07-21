@@ -26,3 +26,9 @@ console.log(arr.flat().unique().sort(sort));
 
 // 其实有 flat 方法， flat兼容性 https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/flat
 console.log(Array.from(new Set(arr.flat(Infinity))).sort((a,b)=>{ return a-b}))
+
+// 非递归，迭代的方式
+function deepFlatten(arr) {
+  var result = []
+  
+}
