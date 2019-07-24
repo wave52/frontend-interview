@@ -1,4 +1,4 @@
-// LazyMan TODO
+// LazyMan TODO:
 function LazyManClass(name) {
     console.log(`Hi I am ${name}`)
 }
