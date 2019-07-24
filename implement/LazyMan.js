@@ -1,16 +1,56 @@
-// LazyMan TODO:
-function LazyManClass(name) {
-    console.log(`Hi I am ${name}`)
-}
-LazyManClass.prototype.sleep = function (wait) {
-    var _this = this;
-    setTimeout(() => _this, wait * 1000)
-}
-LazyManClass.prototype.eat = function (food) {
-    console.log(`I am eating ${food}`)
+class LazyManClass {
+    constructor(name) {
+        this.taskList = [];
+        this.name = name;
+        console.log(`Hi I am ${this.name}`);
+        setTimeout(() => {
+            this.next();
+        }, 0);
+    }
+    eat (name) {
+        var that = this;
+        var fn = (function (n) {
+            return function () {
+                console.log(`I am eating ${n}`)
+                that.next();
+            }
+        })(name);
+        this.taskList.push(fn);
+        return this;
+    }
+    sleepFirst (time) {
+        var that = this;
+        var fn = (function (t) {
+            return function () {
+                setTimeout(() => {
+                    console.log(`等待了${t}秒...`)
+                    that.next();
+                }, t * 1000);  
+            }
+        })(time);
+        this.taskList.unshift(fn);
+        return this;
+    }
+    sleep (time) {
+        var that = this
+        var fn = (function (t) {
+            return function () {
+                setTimeout(() => {
+                    console.log(`等待了${t}秒...`)
+                    that.next();
+                }, t * 1000); 
+            }
+        })(time);
+        this.taskList.push(fn);
+        return this;
+    }
+    next () {
+        var fn = this.taskList.shift();
+        fn && fn();
+    }
 }
 function LazyMan(name) {
-    return new LazyManClass(name)
+    return new LazyManClass(name);
 }
 
 // 实现以下功能
