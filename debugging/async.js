@@ -12,7 +12,7 @@ async function async2() {
 console.log( 'script start' )
 
 setImmediate(() => {
-  console.log('immediate');
+  console.log('setImmediate');
 });
 
 setTimeout( function () {
@@ -31,3 +31,18 @@ new Promise( function ( resolve ) {
 process.nextTick(()=> console.log( 'nextTick' )) // 微任务
 
 console.log( 'script end' );
+
+/* 
+script start
+async1 start
+async2
+promise1
+script end
+nextTick
+promise2
+async1 end
+setTimeout
+setImmediate
+
+node 中 async1 end 在 promise2 之后 https://v8.dev/blog/fast-async#await-under-the-hood
+*/
