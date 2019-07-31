@@ -10,6 +10,17 @@ var b = 10;
 })()
 ```
 
+<details>
+  <summary>
+    <b>答案</b>
+  </summary>
+  <p>
+    function b()<br/>
+  </p>
+</details>
+
+---
+
 ## 2
 
 ```javascript
@@ -22,3 +33,16 @@ var a = 10;
     console.log(a)
 })()
 ```
+
+<details>
+  <summary>
+    <b>答案</b>
+  </summary>
+  <p>
+    undefined<br/>
+    10<br/>
+    20<br/>
+  </p>
+</details>
+
+---

@@ -13,6 +13,18 @@ print();
 new print();
 ```
 
+<details>
+  <summary>
+    <b>答案</b>
+  </summary>
+  <p>
+    234<br/>
+    234
+  </p>
+</details>
+
+---
+
 ## 2
 
 ```javascript
@@ -24,8 +36,25 @@ var foo = {
     return this.a;
   },
 };
-foo.bar()(foo.bar)()((foo.bar = foo.bar))()(foo.bar, foo.bar)();
+foo.bar();
+(foo.bar)();
+((foo.bar = foo.bar))();
+(foo.bar, foo.bar)();
 ```
+
+<details>
+  <summary>
+    <b>答案</b>
+  </summary>
+  <p>
+    20<br />
+    20<br />
+    10<br />
+    10<br />
+  </p>
+</details>
+
+---
 
 ## 3
 
@@ -51,6 +80,20 @@ var b = new B();
 b.showThis();
 ```
 
+<details>
+  <summary>
+    <b>答案</b>
+  </summary>
+  <p>
+    undefined<br />
+    null<br />
+    C{}<br />
+    B{showThis:f}<br />
+  </p>
+</details>
+
+---
+
 ## 4
 
 ```javascript
@@ -67,3 +110,15 @@ var obj = {
 };
 obj.methods(fn, 1);
 ```
+
+<details>
+  <summary>
+    <b>答案</b>
+  </summary>
+  <p>
+    10<br />
+    2<br />
+  </p>
+</details>
+
+---
