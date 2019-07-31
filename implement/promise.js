@@ -209,21 +209,18 @@ Promise.race = function(promises) {
 //all方法(获取所有的promise，都执行then，把结果放到数组，一起返回)
 Promise.all = function(promises) {
   let arr = [];
-  let i = 0;
-  function processData(index, data) {
-    arr[index] = data;
-    i++;
-    if (i == promises.length) {
-      resolve(arr);
-    }
-  }
+  let count = 0;
   return new Promise((resolve, reject) => {
     for (let i = 0; i < promises.length; i++) {
       promises[i].then(data => {
-        processData(i, data);
+        arr[i] = data;
+        count++;
+        if (i == promises.length) {
+          resolve(arr);
+        }
       }, reject);
     }
-  });
+  });03
 };
 // done
 Promise.prototype.done = function(onFulfilled, onRejected) {
@@ -234,8 +231,25 @@ Promise.prototype.done = function(onFulfilled, onRejected) {
     }, 0);
   });
 };
+// any
+Promise.any = function(promises) {
+  const result = []
+  return Promise.all(promises.map(promise => {
+    // 控制Promise.all处理的所有的promise都执行reslove决议
+    return Promise.resolve(promise).then(res => {
+      // 但是只记录实际上决议为resolve的结果值
+      result.push(res)
+    }, () => {
+      // 防止穿透，这里可以进行拒绝信息的返回
+    }) 
+  })).then(() => {
+    return new Promise((resolve, reject) => {
+      if (result.length > 0) resolve(result)
+      else reject(result)
+    })
+  })
+}
 // allSettled TODO:
-// any TODO:
 
 /****************** 测试数据 *******************/
 var myPromise = new Promise(function(resolve, reject) {
