@@ -215,13 +215,14 @@ Promise.all = function(promises) {
       promises[i].then(data => {
         arr[i] = data;
         count++;
-        if (i == promises.length) {
+        if (count == promises.length) {
           resolve(arr);
         }
       }, reject);
     }
-  });03
+  });
 };
+
 // done
 Promise.prototype.done = function(onFulfilled, onRejected) {
   var self = arguments.length ? this.then.apply(this, arguments) : this;
@@ -231,11 +232,12 @@ Promise.prototype.done = function(onFulfilled, onRejected) {
     }, 0);
   });
 };
-// any
+
+// any https://github.com/tc39/proposal-promise-any
 Promise.any = function(promises) {
   const result = []
   return Promise.all(promises.map(promise => {
-    // 控制Promise.all处理的所有的promise都执行reslove决议
+    // 控制Promise.all处理的所有的promise都执行resolve决议
     return Promise.resolve(promise).then(res => {
       // 但是只记录实际上决议为resolve的结果值
       result.push(res)
@@ -249,7 +251,17 @@ Promise.any = function(promises) {
     })
   })
 }
-// allSettled TODO:
+
+// allSettled https://github.com/tc39/proposal-promise-allSettled
+Promise.allSettled = function(promises) {
+  return Promise.all(promises.map(promise => {
+    return Promise.resolve(promise).then((value) => {
+      return {status: 'fulfilled', value: value};
+    }).catch(function (reason) {
+      return {status: 'rejected', reason: reason};
+    });
+  }))
+}
 
 /****************** 测试数据 *******************/
 var myPromise = new Promise(function(resolve, reject) {

@@ -122,3 +122,28 @@ obj.methods(fn, 1);
 </details>
 
 ---
+
+## 5
+
+```javascript
+var x = 100;
+function A() {
+  this.x = 10;
+  this.foo = function() {
+    console.log(this.x)
+  }
+}
+var a = new A();
+a.foo.call(null);
+```
+
+<details>
+  <summary>
+    <b>答案</b>
+  </summary>
+  <p>
+    100<br />
+  </p>
+</details>
+
+---

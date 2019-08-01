@@ -18,7 +18,7 @@ Function.prototype.apply2 = function(context, arr) {
 
 // ES6
 Function.prototype.apply2 = function(context, arr) {
-    let context = context || window; // 因为传进来的context有可能是null
+    context = context || window; // 因为传进来的context有可能是null
     context.fn = this;
     arr = arr || [];
     const result = context.fn(...arr); // 相当于执行了context.fn(arguments[1], arguments[2]);
