@@ -39,7 +39,7 @@ function moveZero2(arr) {
     }
     j++;
   }
-  return arr
+  return arr;
 }
 
 console.log(moveZero2([0, 1, 0, 3, 12]));

@@ -56,17 +56,17 @@ let result = [
 
 // 1
 function convert(list) {
-  var map = {}
+  var map = {};
   return list.reduce((total, current) => {
     map[current.id] = current;
     if (current.parentId === 0) {
-      total.push(current)
+      total.push(current);
     } else {
-      var parent = map[current.parentId]      
-      if(!parent.children) parent.children = []
-      parent.children.push(current)
+      var parent = map[current.parentId];
+      if (!parent.children) parent.children = [];
+      parent.children.push(current);
     }
-    return total
+    return total;
   }, []);
 }
 

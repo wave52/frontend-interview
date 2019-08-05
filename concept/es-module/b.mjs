@@ -1,4 +1,4 @@
-import { a, modify } from "./a.mjs";
+import { a, modify } from './a.mjs';
 
 console.log(a);
 

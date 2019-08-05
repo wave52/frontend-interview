@@ -11,12 +11,12 @@
 
 // 我的实现：
 
-const PENDING = "pending";
-const FULFILLED = "fulfilled";
-const REJECTED = "rejected";
+const PENDING = 'pending';
+const FULFILLED = 'fulfilled';
+const REJECTED = 'rejected';
 class Promise {
   constructor(executor) {
-    this.state = "pending";
+    this.state = 'pending';
     this.value = undefined;
     this.reason = undefined;
     // 成功存放的数组
@@ -56,10 +56,10 @@ class Promise {
   then(onFulfilled, onRejected) {
     // onFulfilled如果不是函数，就忽略onFulfilled，直接返回value
     onFulfilled =
-      typeof onFulfilled === "function" ? onFulfilled : value => value;
+      typeof onFulfilled === 'function' ? onFulfilled : value => value;
     // onRejected如果不是函数，就忽略onRejected，直接扔出错误
     onRejected =
-      typeof onRejected === "function"
+      typeof onRejected === 'function'
         ? onRejected
         : err => {
             throw err;
@@ -123,17 +123,17 @@ function resolvePromise(promise2, x, resolve, reject) {
   // 循环引用报错
   if (x === promise2) {
     // reject报错
-    return reject(new TypeError("Chaining cycle detected for promise"));
+    return reject(new TypeError('Chaining cycle detected for promise'));
   }
   // 防止多次调用
   let called;
   // x不是null 且x是对象或者函数
-  if (x != null && (typeof x === "object" || typeof x === "function")) {
+  if (x != null && (typeof x === 'object' || typeof x === 'function')) {
     try {
       // A+规定，声明then = x的then方法
       let then = x.then;
       // 如果then是函数，就默认是promise了
-      if (typeof then === "function") {
+      if (typeof then === 'function') {
         // 就让then执行 第一个参数是this   后面是成功的回调 和 失败的回调
         then.call(
           x,
@@ -235,49 +235,58 @@ Promise.prototype.done = function(onFulfilled, onRejected) {
 
 // any https://github.com/tc39/proposal-promise-any
 Promise.any = function(promises) {
-  const result = []
-  return Promise.all(promises.map(promise => {
-    // 控制Promise.all处理的所有的promise都执行resolve决议
-    return Promise.resolve(promise).then(res => {
-      // 但是只记录实际上决议为resolve的结果值
-      result.push(res)
-    }, () => {
-      // 防止穿透，这里可以进行拒绝信息的返回
-    }) 
-  })).then(() => {
-    return new Promise((resolve, reject) => {
-      if (result.length > 0) resolve(result)
-      else reject(result)
+  const result = [];
+  return Promise.all(
+    promises.map(promise => {
+      // 控制Promise.all处理的所有的promise都执行resolve决议
+      return Promise.resolve(promise).then(
+        res => {
+          // 但是只记录实际上决议为resolve的结果值
+          result.push(res);
+        },
+        () => {
+          // 防止穿透，这里可以进行拒绝信息的返回
+        }
+      );
     })
-  })
-}
+  ).then(() => {
+    return new Promise((resolve, reject) => {
+      if (result.length > 0) resolve(result);
+      else reject(result);
+    });
+  });
+};
 
 // allSettled https://github.com/tc39/proposal-promise-allSettled
 Promise.allSettled = function(promises) {
-  return Promise.all(promises.map(promise => {
-    return Promise.resolve(promise).then((value) => {
-      return {status: 'fulfilled', value: value};
-    }).catch(function (reason) {
-      return {status: 'rejected', reason: reason};
-    });
-  }))
-}
+  return Promise.all(
+    promises.map(promise => {
+      return Promise.resolve(promise)
+        .then(value => {
+          return { status: 'fulfilled', value: value };
+        })
+        .catch(function(reason) {
+          return { status: 'rejected', reason: reason };
+        });
+    })
+  );
+};
 
 /****************** 测试数据 *******************/
 var myPromise = new Promise(function(resolve, reject) {
   // 当异步代码执行成功时，我们才会调用resolve(...), 当异步代码失败时就会调用reject(...)
   // 在本例中，我们使用setTimeout(...)来模拟异步代码，实际编码时可能是XHR请求或是HTML5的一些API方法.
-  console.log("----------------- 流程开始 --------------------");
+  console.log('----------------- 流程开始 --------------------');
   setTimeout(function() {
-    resolve("promise初始化resolve成功!"); // 代码正常执行！
+    resolve('promise初始化resolve成功!'); // 代码正常执行！
   }, 500);
 });
 myPromise
   .then(function(successMessage) {
     return new Promise(function(resolve, reject) {
       setTimeout(function() {
-        console.log("myPromise then 1 收到 resolveMessage:" + successMessage);
-        reject("from then 1");
+        console.log('myPromise then 1 收到 resolveMessage:' + successMessage);
+        reject('from then 1');
       }, 3000);
     });
   })
@@ -285,16 +294,16 @@ myPromise
     function(successMessage) {
       return new Promise(function(resolve, reject) {
         setTimeout(function() {
-          console.log("myPromise then 2 收到 resolveMessage:" + successMessage);
-          resolve("from then 2");
+          console.log('myPromise then 2 收到 resolveMessage:' + successMessage);
+          resolve('from then 2');
         }, 2000);
       });
     },
     function(failMessage) {
       return new Promise(function(resolve, reject) {
         setTimeout(function() {
-          console.log("myPromise then 2 收到 rejectMessage:" + failMessage);
-          resolve("from then 2");
+          console.log('myPromise then 2 收到 rejectMessage:' + failMessage);
+          resolve('from then 2');
         }, 1000);
       });
     }
@@ -302,15 +311,15 @@ myPromise
   .then(function(successMessage) {
     return new Promise(function(resolve, reject) {
       setTimeout(function() {
-        console.log("myPromise then 3 收到 resolveMessage:" + successMessage);
-        reject("from then 3");
+        console.log('myPromise then 3 收到 resolveMessage:' + successMessage);
+        reject('from then 3');
       }, 1000);
     });
   })
   .catch(function(error) {
-    console.log("caught rejected data:");
+    console.log('caught rejected data:');
     console.log(error);
   })
   .finally(function() {
-    console.log("-----------全部处理完毕！-----------");
+    console.log('-----------全部处理完毕！-----------');
   });

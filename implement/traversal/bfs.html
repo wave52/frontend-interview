@@ -1,86 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>DOM树广度优先遍历</title>
-</head>
-<body>
+  </head>
+  <body>
     <div>树广度优先遍历即层次遍历</div>
     <div>
-        <div>
-            <button>button</button>
-        </div>
-        <div>
-            <label>label</label>
-        </div>
-        <div>
-            <input />
-        </div>
+      <div>
+        <button>button</button>
+      </div>
+      <div>
+        <label>label</label>
+      </div>
+      <div>
+        <input />
+      </div>
     </div>
     <span>span</span>
     <div>
-        <div>
-            <div>div</div>
-        </div>
-        <div>
-            <ul>
-                <li>1</li>
-                <li>2</li>
-                <li>3</li>
-                <li>4</li>
-                <li>5</li>
-            </ul>
-        </div>
-        <div>
-            <div>
-                <section>
-                    <h1>
-                        <span>span</span>
-                    </h1>
-                </section>
-                <p>div</p>
-            </div>
-        </div>
+      <div>
         <div>div</div>
+      </div>
+      <div>
+        <ul>
+          <li>1</li>
+          <li>2</li>
+          <li>3</li>
+          <li>4</li>
+          <li>5</li>
+        </ul>
+      </div>
+      <div>
+        <div>
+          <section>
+            <h1>
+              <span>span</span>
+            </h1>
+          </section>
+          <p>div</p>
+        </div>
+      </div>
+      <div>div</div>
     </div>
-</body>
-<script>
+  </body>
+  <script>
     /* 使用队列实现，把数组当做队列用 */
     function traversal(node) {
-        const queue = [];
-        queue.push(node);
-        while(queue.length > 0) {
-            const elm = queue.shift();
-            if (elm && elm.nodeType === 1) {
-                console.log(elm.tagName);
-                for(let i = 0; i < elm.children.length; i++) {
-                    queue.push(elm.children[i])
-                }
-            }
+      const queue = [];
+      queue.push(node);
+      while (queue.length > 0) {
+        const elm = queue.shift();
+        if (elm && elm.nodeType === 1) {
+          console.log(elm.tagName);
+          for (let i = 0; i < elm.children.length; i++) {
+            queue.push(elm.children[i]);
+          }
         }
+      }
     }
 
     /* 分层输出，其实是深度优先地构建数组 */
     function traversalWithLevel(root) {
-        var levels = [];
-        if(!root) return levels;
-        function level(node, depth) {
-            if (depth === levels.length) {
-                levels.push([])
-            }
-            levels[depth].push(node.tagName)
-            for (let i = 0; i < node.children.length; i++) {
-                level(node.children[i], depth + 1)
-            }
+      var levels = [];
+      if (!root) return levels;
+      function level(node, depth) {
+        if (depth === levels.length) {
+          levels.push([]);
         }
-        level(root, 0)
-        console.log(levels)
+        levels[depth].push(node.tagName);
+        for (let i = 0; i < node.children.length; i++) {
+          level(node.children[i], depth + 1);
+        }
+      }
+      level(root, 0);
+      console.log(levels);
     }
 
     /* test */
-    const root = document.getElementsByTagName('body')[0]
+    const root = document.getElementsByTagName('body')[0];
     traversalWithLevel(root);
-</script>
+  </script>
 </html>

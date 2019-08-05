@@ -41,8 +41,6 @@ function lcs(str1, str2) {
     }
     return str;
   }
-  
-  
 }
 
-console.log(lcs('abbcc', 'dbbcc'))
+console.log(lcs('abbcc', 'dbbcc'));

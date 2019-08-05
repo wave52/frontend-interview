@@ -3,11 +3,11 @@ function recurFib(n) {
   if (n < 2) {
     return n;
   } else {
-    return recurFib(n-1) + recurFib(n-2);
-  } 
+    return recurFib(n - 1) + recurFib(n - 2);
+  }
 }
 
-console.log(recurFib(1))
+console.log(recurFib(1));
 
 // 动态规划
 function dynFib(n) {
@@ -18,12 +18,12 @@ function dynFib(n) {
   val[1] = 1;
   val[2] = 1;
   for (var i = 2; i <= n + 1; ++i) {
-    val[i] = val[i-1] + val[i-2]
+    val[i] = val[i - 1] + val[i - 2];
   }
-  return val[n]
+  return val[n];
 }
 
-console.log(dynFib(1))
+console.log(dynFib(1));
 
 // 迭代
 function iterFib(n) {
@@ -42,4 +42,4 @@ function iterFib(n) {
   }
 }
 
-console.log(iterFib(1))
+console.log(iterFib(1));

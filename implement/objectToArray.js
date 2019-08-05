@@ -5,4 +5,4 @@ function format(obj) {
   return Array.from({ length: 12 }).map((_, index) => obj[index + 1] || null);
 }
 
-console.log(format({1:222, 2:123, 5:888}))
+console.log(format({ 1: 222, 2: 123, 5: 888 }));

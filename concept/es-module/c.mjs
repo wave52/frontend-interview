@@ -1,7 +1,7 @@
-import a, {modify } from "./a.mjs";
+import a, { modify } from './a.mjs';
 
-console.log(a)
+console.log(a);
 
-modify()
+modify();
 
-console.log('c', a)
+console.log('c', a);

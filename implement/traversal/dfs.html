@@ -1,82 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>DOM树深度优先遍历</title>
-</head>
-<body>
+  </head>
+  <body>
     <div>树深度优先遍历即先序遍历</div>
     <div>
-        <div>
-            <button>button</button>
-        </div>
-        <div>
-            <label>label</label>
-        </div>
-        <div>
-            <input />
-        </div>
+      <div>
+        <button>button</button>
+      </div>
+      <div>
+        <label>label</label>
+      </div>
+      <div>
+        <input />
+      </div>
     </div>
     <span>span</span>
     <div>
+      <div>
+        <div>div</div>
+      </div>
+      <div>
+        <ul>
+          <li>1</li>
+          <li>2</li>
+          <li>3</li>
+          <li>4</li>
+          <li>5</li>
+        </ul>
+      </div>
+      <div>
         <div>
-            <div>div</div>
+          <section>
+            <h1>
+              <span>span</span>
+            </h1>
+          </section>
+          <p>div</p>
         </div>
-        <div>
-            <ul>
-                <li>1</li>
-                <li>2</li>
-                <li>3</li>
-                <li>4</li>
-                <li>5</li>
-            </ul>
-        </div>
-        <div>
-            <div>
-                <section>
-                    <h1>
-                        <span>span</span>
-                    </h1>
-                </section>
-                <p>div</p>
-            </div>
-        </div>
-        <div>
-            <a href="https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/9">dfs</a>
-        </div>
+      </div>
+      <div>
+        <a
+          href="https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/9"
+          >dfs</a
+        >
+      </div>
     </div>
-</body>
-<script>
+  </body>
+  <script>
     /* 迭代的方式：使用栈实现，把数组当做栈用 */
     function traversal(node) {
-        const stack = [];
-        stack.push(node)
-        while(stack.length > 0) {
-            const elm = stack.pop();
-            if (elm && elm.nodeType === 1) {
-                console.log(elm.tagName);
-                const length = elm.children.length;
-                for (let i = length - 1; i >= 0; i--) {
-                    stack.push(elm.children[i])
-                }
-            }
+      const stack = [];
+      stack.push(node);
+      while (stack.length > 0) {
+        const elm = stack.pop();
+        if (elm && elm.nodeType === 1) {
+          console.log(elm.tagName);
+          const length = elm.children.length;
+          for (let i = length - 1; i >= 0; i--) {
+            stack.push(elm.children[i]);
+          }
         }
+      }
     }
 
     /* 递归的方式 */
     function traversal2(node) {
-        if(node && node.nodeType === 1) {
-            console.log(node.tagName)
-        }
-        for(let i = 0; i < node.children.length; i++) {
-            traversal2(node.children[i])
-        }
+      if (node && node.nodeType === 1) {
+        console.log(node.tagName);
+      }
+      for (let i = 0; i < node.children.length; i++) {
+        traversal2(node.children[i]);
+      }
     }
 
     /* test */
-    const root = document.getElementsByTagName('body')[0]
+    const root = document.getElementsByTagName('body')[0];
     traversal2(root);
-</script>
+  </script>
 </html>

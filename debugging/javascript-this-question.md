@@ -37,8 +37,8 @@ var foo = {
   },
 };
 foo.bar();
-(foo.bar)();
-((foo.bar = foo.bar))();
+foo.bar();
+(foo.bar = foo.bar)();
 (foo.bar, foo.bar)();
 ```
 
@@ -130,8 +130,8 @@ var x = 100;
 function A() {
   this.x = 10;
   this.foo = function() {
-    console.log(this.x)
-  }
+    console.log(this.x);
+  };
 }
 var a = new A();
 a.foo.call(null);

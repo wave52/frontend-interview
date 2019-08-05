@@ -4,13 +4,13 @@ var arr2 = ['A', 'B', 'C', 'D'];
 function merge(arr1, arr2) {
   var arr3 = arr1.concat();
   var i = 0;
-  while(i < arr2.length) {
-    for(var j = 0; j <= arr3.length - 1; j++) {
+  while (i < arr2.length) {
+    for (var j = 0; j <= arr3.length - 1; j++) {
       if (
-        arr2[i].charAt(0) === arr3[j].charAt(0)
-        && (j + 1 === arr3.length || arr2[i].charAt(0) !== arr3[j + 1].charAt(0))
+        arr2[i].charAt(0) === arr3[j].charAt(0) &&
+        (j + 1 === arr3.length || arr2[i].charAt(0) !== arr3[j + 1].charAt(0))
       ) {
-        arr3.splice(j + 1, 0, arr2[i])
+        arr3.splice(j + 1, 0, arr2[i]);
         break;
       }
     }

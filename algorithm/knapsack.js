@@ -10,11 +10,11 @@
 // 贪心算法,将物品按比率降序排,依次尽可能多的放入
 function ksack(values, weights, capacity) {
   var load = 0;
-  var i    = 0;
-  var w    = 0;
+  var i = 0;
+  var w = 0;
 
   while (load < capacity && i < 4) {
-    if (weights[i] <= (capacity - load)) {
+    if (weights[i] <= capacity - load) {
       w += values[i];
       load += weights[i];
     } else {
@@ -27,7 +27,7 @@ function ksack(values, weights, capacity) {
   return w;
 }
 
-var values = [50, 140, 60 ,60];
+var values = [50, 140, 60, 60];
 var weights = [5, 20, 10, 12];
 var capacity = 30;
 console.log(ksack(values, weights, capacity));
@@ -45,13 +45,13 @@ function knapsack(values, sizes, capacity, n) {
   if (n === 0 || capacity === 0) {
     return 0;
   }
-  if (sizes[n-1] > capacity) {
+  if (sizes[n - 1] > capacity) {
     return knapsack(values, sizes, capacity, n - 1);
   } else {
     return max(
-      values[n - 1] + knapsack(values, sizes, capacity - sizes[n-1], n - 1),
+      values[n - 1] + knapsack(values, sizes, capacity - sizes[n - 1], n - 1),
       knapsack(values, sizes, capacity, n - 1)
-    )
+    );
   }
 }
 
@@ -59,7 +59,7 @@ var values = [4, 5, 10, 11, 13];
 var sizes = [3, 4, 7, 8, 9];
 var capacity = 16;
 var n = 5;
-console.log(knapsack(values, sizes, capacity, n))
+console.log(knapsack(values, sizes, capacity, n));
 
 // 动态规划
 function dKnapsack(values, sizes, capacity, n) {
@@ -72,21 +72,18 @@ function dKnapsack(values, sizes, capacity, n) {
       if (i == 0 || w == 0) {
         k[i][w] = 0;
       } else if (sizes[i - 1] > w) {
-        k[i][w] = k[i - 1][w]
+        k[i][w] = k[i - 1][w];
       } else {
-        k[i][w] = max(
-          values[i - 1] + k[i - 1][w - sizes[i- 1]], 
-          k[i - 1][w]
-        )
+        k[i][w] = max(values[i - 1] + k[i - 1][w - sizes[i - 1]], k[i - 1][w]);
       }
     }
   }
-  console.log('状态表:\n', k)
+  console.log('状态表:\n', k);
   return k[n][capacity];
 }
 
 // 数据同上
-console.log(dKnapsack(values, sizes, capacity, n))
+console.log(dKnapsack(values, sizes, capacity, n));
 
 // 空间压缩优化
 // TODO
