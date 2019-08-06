@@ -64,6 +64,8 @@ console.log(o.name)
 
  -->
 
+# 4
+
 ```javascript
 function Foo() {
   Foo.a = function() {
@@ -89,6 +91,8 @@ Foo.a();
 
 4, 2, 1
 
+# 5
+
 ```javascript
 String('11') == new String('11');
 String('11') === new String('11');
@@ -99,3 +103,25 @@ String('11') === new String('11');
 true
 
 false
+
+# 6
+
+```javascript
+1 + '1';
+
+2 * '2';
+
+[(1, 2)] + [2, 1];
+
+'a' + +'b';
+```
+
+结果:
+
+11
+
+4
+
+1,22,1
+
+aNaN
