@@ -3,6 +3,14 @@
 # 1
 
 ```javascript
+['1', '2', '3'].map(parseInt);
+```
+
+结果 [1, NaN, NaN]
+
+# 2
+
+```javascript
 var obj = {
   '2': 3,
   '3': 4,
@@ -17,7 +25,7 @@ console.log(obj);
 
 结果：[,,1,2], length 为 4
 
-# 2
+# 3
 
 ```javascript
 var a = { n: 1 };
@@ -34,7 +42,7 @@ undefined
 
 {n:2}
 
-# 3
+# 4
 
 ```javascript
 function changeObjProperty(o) {
@@ -64,7 +72,7 @@ console.log(o.name)
 
  -->
 
-# 4
+# 5
 
 ```javascript
 function Foo() {
@@ -91,7 +99,7 @@ Foo.a();
 
 4, 2, 1
 
-# 5
+# 6
 
 ```javascript
 String('11') == new String('11');
@@ -104,7 +112,7 @@ true
 
 false
 
-# 6
+# 7
 
 ```javascript
 1 + '1';
@@ -125,3 +133,11 @@ false
 1,22,1
 
 aNaN
+
+# 8
+
+```javascript
+[3, 15, 8, 29, 102, 22].sort();
+```
+
+结果: [102, 15, 22, 29, 3, 8]
