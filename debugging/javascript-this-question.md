@@ -147,3 +147,104 @@ a.foo.call(null);
 </details>
 
 ---
+
+## 6
+
+```javascript
+// 1
+let circle = {
+  get() {
+    function a() {
+      let b = () => {
+        console.log(this)
+      }
+      b()
+    }
+    a()
+  }
+}
+circle.get()
+
+// 2
+var c = { c: 1 }
+let circle = {
+  get() {
+    function a() {
+      let b = () => {
+        console.log(this)
+      }
+      b()
+    }
+    a.call(c)
+  }
+}
+circle.get()
+
+// 3
+var c = { c: 1 }
+let circle = {
+  get() {
+    function a() {
+      function b() {
+        console.log(this)
+      }
+      b()
+    }
+    a.call(c)
+  }
+}
+circle.get()
+
+// 4
+let circle = {
+  get() {
+    let a = ()=> {
+      console.log(this)
+    }
+    a()
+  }
+}
+circle.get()
+
+// 5
+var c = { c: 1 }
+let circle = {
+  get() {
+    let a = ()=> {
+      console.log(this)
+    }
+    a.call(c)
+  }
+}
+circle.get()
+
+// 6
+let circle = {
+  get() {
+    function a() {
+      function b() {
+        console.log(this)
+      }
+      return b
+    }
+    return a
+  }
+}
+circle.get()()()
+
+```
+
+<details>
+  <summary>
+    <b>答案</b>
+  </summary>
+  <p>
+    window<br />
+    c<br />
+    window<br />
+    circle<br />
+    circle<br />
+    window<br />
+  </p>
+  <p>解析：5.call不会改变箭头函数指向</p>
+</details>
