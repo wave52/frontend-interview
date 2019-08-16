@@ -87,8 +87,8 @@ b.showThis();
   <p>
     undefined<br />
     null<br />
-    C{}<br />
-    B{showThis:f}<br />
+    o(C的实例，打印出来这样：C{})<br />
+    b(B的实例，打印出来这样：B{showThis:f})<br />
   </p>
 </details>
 
@@ -156,82 +156,93 @@ let circle = {
   get() {
     function a() {
       let b = () => {
-        console.log(this)
-      }
-      b()
+        console.log(this);
+      };
+      b();
     }
-    a()
-  }
-}
-circle.get()
+    a();
+  },
+};
+circle.get();
 
 // 2
-var c = { c: 1 }
+var c = { c: 1 };
 let circle = {
   get() {
     function a() {
       let b = () => {
-        console.log(this)
-      }
-      b()
+        console.log(this);
+      };
+      b();
     }
-    a.call(c)
-  }
-}
-circle.get()
+    a.call(c);
+  },
+};
+circle.get();
 
 // 3
-var c = { c: 1 }
+var c = { c: 1 };
 let circle = {
   get() {
     function a() {
       function b() {
-        console.log(this)
+        console.log(this);
       }
-      b()
+      b();
     }
-    a.call(c)
-  }
-}
-circle.get()
+    a.call(c);
+  },
+};
+circle.get();
 
 // 4
 let circle = {
   get() {
-    let a = ()=> {
-      console.log(this)
-    }
-    a()
-  }
-}
-circle.get()
+    let a = () => {
+      console.log(this);
+    };
+    a();
+  },
+};
+circle.get();
 
 // 5
-var c = { c: 1 }
+var c = { c: 1 };
 let circle = {
   get() {
-    let a = ()=> {
-      console.log(this)
-    }
-    a.call(c)
-  }
-}
-circle.get()
+    let a = () => {
+      console.log(this);
+    };
+    a.call(c);
+  },
+};
+circle.get();
 
 // 6
+var c = { c: 1 };
+let circle = {
+  get() {
+    let a = () => {
+      console.log(this);
+    };
+    a();
+  },
+};
+circle.get.call(c);
+
+// 7
 let circle = {
   get() {
     function a() {
       function b() {
-        console.log(this)
+        console.log(this);
       }
-      return b
+      return b;
     }
-    return a
-  }
-}
-circle.get()()()
-
+    return a;
+  },
+};
+circle.get()()();
 ```
 
 <details>
@@ -244,7 +255,41 @@ circle.get()()()
     window<br />
     circle<br />
     circle<br />
+    c<br />
     window<br />
   </p>
-  <p>解析：5.call不会改变箭头函数指向</p>
+  <p>解析：
+  1.箭头函数b的this绑定词法作用域，这里即是function a(){}，a被调用时没有调用者，所以是window<br />
+  2.a被调用时调用者是c对象，所以是c<br />
+  3.b不是箭头函数了，看b的调用，没有调用者，所以是window<br />
+  4.箭头函数a的this绑定词法作用域，这里即是get(){}，get被调用时circle是调用者，所以是circle<br />
+  5.箭头函数a的this绑定词法作用域，这里即是get(){}，get被调用时circle是调用者，所以是circle，与a调用者是谁无关<br />
+  6.同上，a的this的绑定，与a调用者是谁无关，只与当前的词法作用域有关，即get的调用者有关<br />
+  7.看谁调用了b
+  </p>
+</details>
+
+```javascript
+class A {
+  constructor(dom) {
+    dom.addEventListener('click', this._handle);
+  }
+  _handle = () => {
+    console.log('what is', this);
+  };
+}
+
+const btn = document.getElementById('btn');
+const a = new A(btn);
+```
+
+<details>
+  <summary>
+    <b>答案</b>
+  </summary>
+  <p>
+    a(A的实例)<br />
+  </p>
+  <p>解析：和第3题第二段代码一个意思
+  </p>
 </details>

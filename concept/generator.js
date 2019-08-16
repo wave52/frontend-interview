@@ -5,15 +5,23 @@
  * @LastEditTime: 2019-08-13 11:15:38
  * @LastEditors: Please set LastEditors
  */
+
+function call() {
+  return 'test';
+}
+
 function* genNode() {
-  yield 1;
+  const firstNextArg = yield call();
+  console.log('firstNextArg?', firstNextArg);
   yield 2;
 }
 
 const node = genNode();
 
-console.log(node.next());
-console.log(node.next());
+console.log(node);
+
+console.log(node.next('hh'));
+console.log(node.next('ww'));
 console.log(node.next());
 
 console.log('======================');
