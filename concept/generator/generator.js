@@ -1,28 +1,32 @@
-/*
- * @Description: In User Settings Edit
- * @Author: your name
- * @Date: 2019-08-13 09:52:04
- * @LastEditTime: 2019-08-13 11:15:38
- * @LastEditors: Please set LastEditors
- */
+const co = require('./co');
 
-function call() {
-  return 'test';
-}
-
-function* genNode() {
-  const firstNextArg = yield call();
-  console.log('firstNextArg?', firstNextArg);
+// 初识 generator 生成器函数
+function* g() {
+  yield 1;
   yield 2;
+  return 3;
 }
+const i = g();
+console.log(i.next()); // { value: 1, done: false }
+console.log(i.next()); // { value: 2, done: false }
+console.log(i.next()); // { value: 3, done: true }
+console.log(i.next()); // { value: undefined, done: true }
 
-const node = genNode();
+console.log('======================');
 
-console.log(node);
-
-console.log(node.next('hh'));
-console.log(node.next('ww'));
-console.log(node.next());
+// yield 后面是表达式
+function call() {
+  return new Promise(resolve => setTimeout(() => resolve('result'), 1000));
+}
+function put(payload) {
+  console.log(payload);
+  return {}; // TODO
+}
+function* gen() {
+  const result = yield call();
+  yield put(result);
+}
+co(gen);
 
 console.log('======================');
 
