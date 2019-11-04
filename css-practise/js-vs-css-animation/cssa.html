@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>css animation</title>
+    <style>
+      #box {
+        width: 100px;
+        height: 100px;
+        border: 1px solid red;
+        background-color: red;
+      }
+      .box {
+        animation: animation 5s infinite;
+      }
+
+      /* opacity 不会重绘 */
+      /* transform: rotate | scale | skew | translate | matrix 不会重绘 */
+      /* filter: brightness | contrast | grayscale | hue-rotate | invert | opacity | saturate | sepia 不会重绘 */
+      /* filter: blur | drop-shadow 会重绘*/
+      /* background-color 会重绘 */
+
+      @keyframes animation {
+        from {
+          /* background-color: red; */
+          opacity: 0.5;
+          transform: rotate(0);
+          filter: brightness(0);
+        }
+
+        to {
+          /* background-color: green; */
+          opacity: 1;
+          transform: rotate(360deg);
+          filter: brightness(100%);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <button id="a">开启动画</button>
+    <button id="j">占用主线程</button>
+    <div id="box"></div>
+  </body>
+  <script>
+    window.onload = function() {
+      const a = document.getElementById('a');
+      const j = document.getElementById('j');
+      const box = document.getElementById('box');
+      a.addEventListener('click', function() {
+        if (a.innerHTML === '开启动画') {
+          a.innerHTML = '关闭动画';
+          box.className += ' box';
+        } else {
+          a.innerHTML = '开启动画';
+          var reg = new RegExp('(\\s|^)' + 'box' + '(\\s|$)');
+          box.className = box.className.replace(reg, '');
+        }
+      });
+      j.addEventListener('click', function() {
+        setTimeout(function() {
+          console.log('start');
+          var start = new Date().valueOf();
+          var i = 0;
+          while (new Date().valueOf() - start < 7000) {
+            i++;
+          }
+          console.log('end', i);
+        }, 0);
+      });
+    };
+  </script>
+</html>

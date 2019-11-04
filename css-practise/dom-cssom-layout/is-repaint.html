@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Test</title>
+  </head>
+  <style>
+    .box {
+      width: 100px;
+      height: 100px;
+      border: 1px solid red;
+      background-color: red;
+      animation: animation 5s infinite;
+    }
+
+    /* opacity 不会重绘 */
+    /* transform: rotate | scale | skew | translate | matrix 不会重绘 */
+    /* filter: brightness | contrast | grayscale | hue-rotate | invert | opacity | saturate | sepia 不会重绘 */
+    /* filter: blur | drop-shadow 会重绘*/
+    /* background-color 会重绘 */
+
+    @keyframes animation {
+      from {
+        /* background-color: red; */
+        opacity: 0.5;
+        transform: rotate(0);
+        filter: brightness(0);
+      }
+      to {
+        /* background-color: green; */
+        opacity: 1;
+        transform: rotate(360deg);
+        filter: brightness(100%);
+      }
+    }
+  </style>
+  <body>
+    <div class="box"></div>
+  </body>
+  <script>
+    // 模拟主线程占用
+    window.onload = function() {
+      // 不要一开始就占用，网页无法完成渲染
+      setTimeout(function() {
+        console.log('start');
+        var start = new Date().valueOf();
+        var i = 0;
+        while (new Date().valueOf() - start < 7000) {
+          i++;
+        }
+        console.log('end', i);
+      }, 0);
+    };
+  </script>
+</html>

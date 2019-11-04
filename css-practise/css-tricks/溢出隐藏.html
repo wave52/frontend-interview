@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>溢出隐藏</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+      .wrapper {
+        /* width: 200px; */
+        width: 100%;
+      }
+      p {
+        border: 1px solid #666;
+      }
+      /* 单行 */
+      .box1 {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      /* 多行 */
+      .box2 {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 3; /* 行数 */
+        overflow: hidden;
+      }
+      /* 多行兼容版 */
+      .box3 {
+        position: relative;
+        line-height: 20px;
+        max-height: 60px;
+        overflow: hidden;
+      }
+      .box3::after {
+        content: '...';
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        padding-left: 40px;
+        background: -webkit-linear-gradient(left, transparent, #fff 55%);
+        background: -o-linear-gradient(right, transparent, #fff 55%);
+        background: -moz-linear-gradient(right, transparent, #fff 55%);
+        background: linear-gradient(to right, transparent, #fff 55%);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+      <p class="box1">
+        一个常见的问题是，ECMAScript 和 JavaScript 到底是什么关系？
+        要讲清楚这个问题，需要回顾历史。1996 年 11 月，JavaScript 的创造者
+        Netscape 公司，决定将 JavaScript 提交给标准化组织
+        ECMA，希望这种语言能够成为国际标准。次年，ECMA 发布 262
+        号标准文件（ECMA-262）的第一版，规定了浏览器脚本语言的标准，并将这种语言称为
+        ECMAScript，这个版本就是 1.0 版。 该标准从一开始就是针对 JavaScript
+        语言制定的，但是之所以不叫 JavaScript，有两个原因。一是商标，Java 是 Sun
+        公司的商标，根据授权协议，只有 Netscape 公司可以合法地使用 JavaScript
+        这个名字，且 JavaScript 本身也已经被 Netscape
+        公司注册为商标。二是想体现这门语言的制定者是 ECMA，不是
+        Netscape，这样有利于保证这门语言的开放性和中立性。 因此，ECMAScript 和
+        JavaScript 的关系是，前者是后者的规格，后者是前者的一种实现（另外的
+        ECMAScript 方言还有 JScript 和
+        ActionScript）。日常场合，这两个词是可以互换的。
+      </p>
+      <p class="box2">
+        一个常见的问题是，ECMAScript 和 JavaScript 到底是什么关系？
+        要讲清楚这个问题，需要回顾历史。1996 年 11 月，JavaScript 的创造者
+        Netscape 公司，决定将 JavaScript 提交给标准化组织
+        ECMA，希望这种语言能够成为国际标准。次年，ECMA 发布 262
+        号标准文件（ECMA-262）的第一版，规定了浏览器脚本语言的标准，并将这种语言称为
+        ECMAScript，这个版本就是 1.0 版。 该标准从一开始就是针对 JavaScript
+        语言制定的，但是之所以不叫 JavaScript，有两个原因。一是商标，Java 是 Sun
+        公司的商标，根据授权协议，只有 Netscape 公司可以合法地使用 JavaScript
+        这个名字，且 JavaScript 本身也已经被 Netscape
+        公司注册为商标。二是想体现这门语言的制定者是 ECMA，不是
+        Netscape，这样有利于保证这门语言的开放性和中立性。 因此，ECMAScript 和
+        JavaScript 的关系是，前者是后者的规格，后者是前者的一种实现（另外的
+        ECMAScript 方言还有 JScript 和
+        ActionScript）。日常场合，这两个词是可以互换的。
+      </p>
+      <p class="box3">
+        一个常见的问题是，ECMAScript 和 JavaScript 到底是什么关系？
+        要讲清楚这个问题，需要回顾历史。1996 年 11 月，JavaScript 的创造者
+        Netscape 公司，决定将 JavaScript 提交给标准化组织
+        ECMA，希望这种语言能够成为国际标准。次年，ECMA 发布 262
+        号标准文件（ECMA-262）的第一版，规定了浏览器脚本语言的标准，并将这种语言称为
+        ECMAScript，这个版本就是 1.0 版。 该标准从一开始就是针对 JavaScript
+        语言制定的，但是之所以不叫 JavaScript，有两个原因。一是商标，Java 是 Sun
+        公司的商标，根据授权协议，只有 Netscape 公司可以合法地使用 JavaScript
+        这个名字，且 JavaScript 本身也已经被 Netscape
+        公司注册为商标。二是想体现这门语言的制定者是 ECMA，不是
+        Netscape，这样有利于保证这门语言的开放性和中立性。 因此，ECMAScript 和
+        JavaScript 的关系是，前者是后者的规格，后者是前者的一种实现（另外的
+        ECMAScript 方言还有 JScript 和
+        ActionScript）。日常场合，这两个词是可以互换的。
+      </p>
+    </div>
+  </body>
+</html>

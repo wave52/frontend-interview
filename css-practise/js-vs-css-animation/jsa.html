@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>js animation</title>
+    <style>
+      body {
+        position: relative;
+      }
+      #box {
+        width: 100px;
+        height: 100px;
+        border: 1px solid red;
+        background-color: red;
+        position: absolute;
+        top: 50px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <button id="a">开启动画</button>
+    <button id="j">占用主线程</button>
+    <div id="box"></div>
+  </body>
+  <script>
+    window.onload = function() {
+      const a = document.getElementById('a');
+      const j = document.getElementById('j');
+      const box = document.getElementById('box');
+      // setInterval 主线程会被占用
+      let render = null;
+      a.addEventListener('click', function() {
+        if (a.innerHTML === '开启动画') {
+          a.innerHTML = '关闭动画';
+          var i = 0;
+          // 1.setInterval
+          // render = setInterval(function() {
+          //   box.style.top = `${i * 2}px`;
+          //   i++;
+          // }, 1000 / 60);
+
+          // 2.setTimeout
+          // render = setTimeout(function() {
+          //   box.style.top = `${i * 2}px`;
+          //   i++;
+          //   render = setTimeout(arguments.callee, 1000 / 60);
+          // }, 1000 / 60);
+
+          // 3.requestAnimationFrame
+          render = requestAnimationFrame(function() {
+            box.style.top = `${i * 2}px`;
+            i++;
+            render = requestAnimationFrame(arguments.callee, 1000 / 60);
+          }, 1000 / 60);
+        } else {
+          a.innerHTML = '开启动画';
+          box.style.top = `50px`;
+          // clearInterval(render)
+          // clearTimeout(render);
+          cancelAnimationFrame(render);
+          render = null;
+        }
+      });
+      j.addEventListener('click', function() {
+        let run = null;
+        if (j.innerHTML === '占用主线程') {
+          j.innerHTML = '释放主线程';
+          run = setInterval(function() {
+            console.log('start');
+            var start = new Date().valueOf();
+
+            var i = 0;
+            while (new Date().valueOf() - start < 1000) {
+              i++;
+            }
+            console.log('end', i);
+          }, 1000);
+        } else {
+          j.innerHTML = '占用主线程';
+          clearInterval(run);
+          run = null;
+        }
+      });
+    };
+  </script>
+</html>
