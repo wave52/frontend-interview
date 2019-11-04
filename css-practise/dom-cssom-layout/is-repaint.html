@@ -16,6 +16,7 @@
     }
 
     /* opacity 不会重绘 */
+    /* visibility: hidden 会重绘，display: none更别说，会回流+重绘*/
     /* transform: rotate | scale | skew | translate | matrix 不会重绘 */
     /* filter: brightness | contrast | grayscale | hue-rotate | invert | opacity | saturate | sepia 不会重绘 */
     /* filter: blur | drop-shadow 会重绘*/
@@ -25,19 +26,22 @@
       from {
         /* background-color: red; */
         opacity: 0.5;
+        /* visibility: hidden; */
         transform: rotate(0);
-        filter: brightness(0);
+        /* filter: brightness(0); */
       }
       to {
         /* background-color: green; */
         opacity: 1;
+        /* visibility: visible; */
         transform: rotate(360deg);
-        filter: brightness(100%);
+        /* filter: brightness(100%); */
       }
     }
   </style>
   <body>
     <div class="box"></div>
+    <div>1</div>
   </body>
   <script>
     // 模拟主线程占用
