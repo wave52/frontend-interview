@@ -67,7 +67,7 @@ class Promise {
     // 声明返回的promise2
     let promise2 = new Promise((resolve, reject) => {
       if (this.state === FULFILLED) {
-        // onFulfilled需异步 asap了解一下
+        // onFulfilled需异步 asap库(as soon as possible)了解一下
         setTimeout(() => {
           try {
             let x = onFulfilled(this.value);

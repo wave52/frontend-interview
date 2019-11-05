@@ -44,4 +44,17 @@ setTimeout
 setImmediate
 
 node 中 async1 end 在 promise2 之后 https://v8.dev/blog/fast-async#await-under-the-hood
+
+async function async1() {
+  console.log('async1 start');
+  await async2();
+  console.log('async1 end');
+}
+// 转化为promise
+async function async1() {
+  console.log('async1 start');
+  Promise.resolve(async2()).then(() => {
+    console.log('async1 end');
+  })
+}
 */
