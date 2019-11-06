@@ -293,3 +293,15 @@ const a = new A(btn);
   <p>解析：和第3题第二段代码一个意思
   </p>
 </details>
+
+## 总结
+
+1.new
+
+2.call, apply, bind
+
+3.who call
+
+4.特殊
+
+5.window (strict undefined)
