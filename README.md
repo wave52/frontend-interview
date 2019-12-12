@@ -32,9 +32,19 @@
 
 ### CSS
 
+[水平居中+垂直居中+水平/垂直居中](https://blog.csdn.net/weixin_37580235/article/details/82317240)
+
 [两栏布局](https://segmentfault.com/a/1190000010698609)
 
+[三列布局](https://blog.csdn.net/a18792627168/article/details/79686746)
+
+[word-break、word-wrap、white-space](https://www.cnblogs.com/dfyg-xiaoxiao/p/9640422.html)
+
 ### 浏览器
+
+[Web 高性能动画及渲染原理](https://www.cnblogs.com/dashnowords/category/1567748.html)
+
+[实践这一次,彻底搞懂浏览器缓存机制](https://juejin.im/post/5c4528a6f265da611a4822cc)
 
 ### Webpack
 
