@@ -1,5 +1,7 @@
 # ES5 与 ES6 类、继承的区别
 
+与其他语言相比，javascript 不具有私有属性和方法，Node12 将支持，使用#表示私有成员变量
+
 ## 类
 
 ### 1.写法对比
@@ -14,11 +16,11 @@ class A {
   static get1() {
     console.log(1);
   }
-  // 实例方法
+  // 原型实例方法
   get2() {
     console.log(2);
   }
-  // 实例方法，会存在在新实例化的对象上
+  // 原型实例方法，会存在在新实例化的对象上
   get3 = () => {
     console.log(3);
   };
@@ -27,13 +29,16 @@ class A {
 // ES5
 function A() {
   this.a = 0;
+  // 实例方法，会存在在新实例化的对象上
   this.get3 = () => {
     console.log(3);
   };
 }
+// 类方法、静态方法
 A.get1 = function() {
   console.log(1);
 };
+// 原型实例方法
 A.prototype.get2 = function() {
   console.log(2);
 };
@@ -164,12 +169,12 @@ class Foo {
   }
 }
 const foo = new Foo();
-Foo = 'Fol'; // it's ok
+Foo = 'Fol'; // ？
 ```
 
 ## 继承
 
-### 1.写法对比
+### 3.写法对比
 
 ```javascript
 // ES6
@@ -204,7 +209,7 @@ var sub = new Sub();
 Sub.__proto__ === Function.prototype;
 ```
 
-### 2.区别
+### 4.区别
 
 #### 1.ES6 子类可以直接通过 `__proto__` 寻址到父类, 而通过 ES5 的方式，`Sub.__proto__ === Function.prototype`
 

@@ -42,6 +42,8 @@ undefined
 
 {n:2}
 
+<!-- a.x 其实是 { n: 1 }.x，但 a 重新复制以后，{ n: 1 } 不在了 -->
+
 # 4
 
 ```javascript
