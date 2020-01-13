@@ -11,7 +11,7 @@ Function.prototype.bind2 = function(context) {
 // ES5 且不使用 apply、call 比较麻烦，因为不能用 xxx.prototype.call 处理 arguments，需要使用 eval，参考 apply、call
 
 // ES6 (可以使用apply、call) 从最简单的写法开始
-// ❌ 这里 bind() 返回的函数是一个箭头函数，箭头函数没有arguments，可能并不满足需要
+// ❌ 这里 bind() 返回的函数是一个箭头函数(想解决this绑定)，但箭头函数没有arguments，可能并不满足需要
 Function.prototype.bind2 = function(...arg1) {
   return (...arg2) => {
     this.call(...arg1, ...arg2);
@@ -26,7 +26,7 @@ Function.prototype.bind2 = function(...arg1) {
   };
 };
 
-// 把上下文体现出来，其实没啥用
+// 把上下文体现出来
 Function.prototype.bind2 = function(context, ...arg1) {
   var fn = this;
   return function(...arg2) {
