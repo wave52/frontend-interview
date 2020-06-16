@@ -1,4 +1,6 @@
 // 背包问题
+// 2020-06-14 之前这么对比总结并不能加深我的记忆，反而是从网上看到的一个系列 https://labuladong.gitbook.io/algo/dong-tai-gui-hua-xi-lie/bei-bao-ling-qian 能学到很多
+// 应该去记动态规划题目的通用模板，并且练习分析的方式，而不是去记 0-1 背包问题、完全背包问题甚至各种背包问题的区别。
 
 // 部分背包问题
 // 部分背包问题的物品是连续的,比如豆子,粉末,布匹
@@ -86,11 +88,13 @@ function dKnapsack(values, sizes, capacity, n) {
 console.log(dKnapsack(values, sizes, capacity, n));
 
 // 空间压缩优化
+// 会发现，i 只与 i - 1 有关，于是可以把，i * j 二维数组转化为 2 * j 二位数组，坏处是无法回溯找最优解
 // TODO
 
 // 完全背包问题
 // 每种物品都有无限件
 // TODO
+// https://labuladong.gitbook.io/algo/dong-tai-gui-hua-xi-lie/bei-bao-ling-qian
 
 // 多重背包问题
 // 每种物品可能有几件
