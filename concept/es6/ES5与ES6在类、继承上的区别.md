@@ -12,6 +12,8 @@ class A {
   constructor() {
     this.a = 0;
   }
+  // 具有争议的 private field - https://zhuanlan.zhihu.com/p/46784477
+  #b = 0;
   // 类方法、静态方法
   static get1() {
     console.log(1);
@@ -29,6 +31,8 @@ class A {
 // ES5
 function A() {
   this.a = 0;
+  // 可以视为 private 变量，约定俗成用下划线开头，其实都可以
+  var _b = 0;
   // 实例方法，会存在在新实例化的对象上
   this.get3 = () => {
     console.log(3);
