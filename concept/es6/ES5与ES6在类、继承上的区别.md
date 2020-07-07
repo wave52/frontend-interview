@@ -201,6 +201,7 @@ Sub.prototype.constructor = Sub;
 var sub = new Sub();
 
 Sub.__proto__ === Function.prototype;
+// Object.getPrototypeOf(Sub)
 
 // 2.构造函数继承
 function Super() {}
@@ -211,6 +212,17 @@ function Sub() {
 var sub = new Sub();
 
 Sub.__proto__ === Function.prototype;
+// Object.getPrototypeOf(Sub)
+```
+
+```js
+// class
+class Super {}
+class Sub extends Super {}
+var sub = new Sub();
+
+Sub.__proto__ === Super;
+// Object.getPrototypeOf(Sub)
 ```
 
 ### 4.区别
